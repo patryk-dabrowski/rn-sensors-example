@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {Text, View, ScrollView, Image, Dimensions} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Dimensions, Image, ScrollView, Text, View} from 'react-native';
 import {Magnetometer} from 'expo-sensors';
-import LPF from "lpf";
+import LPF from 'lpf';
 
 const {height, width} = Dimensions.get('window');
 
