@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Dimensions, Image, ScrollView, Text, View} from 'react-native';
+import {Dimensions, Image, Text, View} from 'react-native';
 import {Magnetometer} from 'expo-sensors';
 import LPF from 'lpf';
+import SensorContainer from "../components/SensorContainer";
 
 const {height, width} = Dimensions.get('window');
 
@@ -23,64 +24,59 @@ export default function CompassScreen() {
   }, []);
 
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic">
+    <SensorContainer>
       <View
         style={{
-          height: height,
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '20%',
         }}>
-        <View
+        <Text
           style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '20%',
+            fontSize: height / 26,
+            fontWeight: 'bold',
+            color: '#fff',
           }}>
-          <Text
-            style={{
-              fontSize: height / 26,
-              fontWeight: 'bold',
-              color: '#fff',
-            }}>
-            {direction(data)}
-          </Text>
-        </View>
-        <View
-          style={{
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-          }}>
-          <Image
-            source={require('../../assets/compass_pointer.png')}
-            style={{height: height / 26, resizeMode: 'contain'}}
-          />
-        </View>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text
-            style={{
-              color: '#fff',
-              fontSize: height / 27,
-              width: width,
-              position: 'absolute',
-              textAlign: 'center',
-            }}>
-            {degree(data)}°
-          </Text>
-          <Image
-            source={require('../../assets/compass_bg.png')}
-            style={{
-              resizeMode: 'contain',
-              height: width - 80,
-              transform: [
-                {rotate: 360 - data + "deg"}
-              ]
-            }}
-          />
-        </View>
+          {direction(data)}
+        </Text>
       </View>
-    </ScrollView>
+      <View
+        style={{
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+        }}>
+        <Image
+          source={require('../../assets/compass_pointer.png')}
+          style={{height: height / 26, resizeMode: 'contain'}}
+        />
+      </View>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text
+          style={{
+            color: '#fff',
+            fontSize: height / 27,
+            width: width,
+            position: 'absolute',
+            textAlign: 'center',
+          }}>
+          {degree(data)}°
+        </Text>
+        <Image
+          source={require('../../assets/compass_bg.png')}
+          style={{
+            resizeMode: 'contain',
+            height: width - 80,
+            transform: [
+              {rotate: 360 - data + "deg"}
+            ]
+          }}
+        />
+      </View>
+    </SensorContainer>
   );
 }
 

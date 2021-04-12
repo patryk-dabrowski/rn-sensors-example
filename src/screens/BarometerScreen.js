@@ -1,41 +1,30 @@
 import React, {useEffect, useState} from 'react';
-import {Dimensions, Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform} from 'react-native';
 import {Barometer} from 'expo-sensors';
-
-const {height, width} = Dimensions.get('window');
+import SensorContainer from "../components/SensorContainer";
+import TextCenter from "../components/TextCenter";
 
 export default function BarometerScreen() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    pressure: 0,
+    relativeAltitude: 0,
+  });
   useEffect(() => {
     const subscribe = Barometer.addListener(barometerData => {
       setData(barometerData);
     })
-
-    return () => {
-      subscribe.remove;
-    }
+    return () => subscribe.remove();
   }, []);
 
-  const {pressure = 0, relativeAltitude = 0} = data;
-
+  const {pressure, relativeAltitude} = data;
   return (
-    <View style={styles.sensor}>
-      <Text>Barometer:</Text>
-      <Text>Pressure: {pressure * 100} Pa</Text>
-      <Text>
+    <SensorContainer>
+      <TextCenter>Barometer:</TextCenter>
+      <TextCenter>Pressure: {pressure * 100} Pa</TextCenter>
+      <TextCenter>
         Relative Altitude:{' '}
         {Platform.OS === 'ios' ? `${relativeAltitude} m` : `Only available on iOS`}
-      </Text>
-    </View>
+      </TextCenter>
+    </SensorContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  sensor: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    height: height,
-    width: width,
-  },
-});
