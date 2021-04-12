@@ -9,6 +9,7 @@ export default function BarometerScreen() {
     pressure: 0,
     relativeAltitude: 0,
   });
+
   useEffect(() => {
     const subscribe = Barometer.addListener(barometerData => {
       setData(barometerData);

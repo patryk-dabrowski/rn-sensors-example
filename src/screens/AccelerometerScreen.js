@@ -1,21 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Accelerometer} from 'expo-sensors';
 import SensorContainer from "../components/SensorContainer";
 import TextCenter from "../components/TextCenter";
 import BtnCenter from "../components/BtnCenter";
 import BtnContainer from "../components/BtnContainer";
+import {round} from "../utils";
+import {useCoordinates} from "../hooks";
 
 
 export default function AccelerometerScreen() {
-  const [data, setData] = useState({
-    x: 0,
-    y: 0,
-    z: 0,
-  });
+  const [coordinates, setCoordinates] = useCoordinates();
 
   useEffect(() => {
     const subscribe = Accelerometer.addListener(accelerometerData => {
-      setData(accelerometerData);
+      setCoordinates(accelerometerData);
     });
     return () => subscribe.remove();
   }, []);
@@ -27,7 +25,7 @@ export default function AccelerometerScreen() {
     Accelerometer.setUpdateInterval(16);
   };
 
-  const {x, y, z} = data;
+  const {x, y, z} = coordinates;
   return (
     <SensorContainer>
       <TextCenter>Accelerometer: (in Gs where 1 G = 9.81 m s^-2)</TextCenter>
@@ -40,11 +38,4 @@ export default function AccelerometerScreen() {
       </BtnContainer>
     </SensorContainer>
   );
-}
-
-function round(n) {
-  if (!n) {
-    return 0;
-  }
-  return Math.floor(n * 100) / 100;
 }

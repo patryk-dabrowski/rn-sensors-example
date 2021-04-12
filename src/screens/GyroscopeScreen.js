@@ -1,20 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Gyroscope} from 'expo-sensors';
 import SensorContainer from "../components/SensorContainer";
 import TextCenter from "../components/TextCenter";
 import BtnCenter from "../components/BtnCenter";
 import BtnContainer from "../components/BtnContainer";
+import {round} from "../utils";
+import {useCoordinates} from "../hooks";
 
 export default function GyroscopeScreen() {
-  const [data, setData] = useState({
-    x: 0,
-    y: 0,
-    z: 0,
-  });
+  const [coordinates, setCoordinates] = useCoordinates();
 
   useEffect(() => {
     const subscribe = Gyroscope.addListener(gyroscopeData => {
-      setData(gyroscopeData);
+      setCoordinates(gyroscopeData);
     });
     return () => subscribe.remove();
   }, []);
@@ -26,7 +24,7 @@ export default function GyroscopeScreen() {
     Gyroscope.setUpdateInterval(16);
   };
 
-  const {x, y, z} = data;
+  const {x, y, z} = coordinates;
   return (
     <SensorContainer>
       <TextCenter>Gyroscope:</TextCenter>
@@ -39,11 +37,4 @@ export default function GyroscopeScreen() {
       </BtnContainer>
     </SensorContainer>
   );
-}
-
-function round(n) {
-  if (!n) {
-    return 0;
-  }
-  return Math.floor(n * 100) / 100;
 }
