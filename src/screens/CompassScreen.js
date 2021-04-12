@@ -5,7 +5,7 @@ import LPF from 'lpf';
 
 const {height, width} = Dimensions.get('window');
 
-export default function Compass() {
+export default function CompassScreen() {
   const [data, setData] = useState(0);
 
   Magnetometer.setUpdateInterval(200);
@@ -49,7 +49,7 @@ export default function Compass() {
             alignItems: 'center',
           }}>
           <Image
-            source={require('../assets/compass_pointer.png')}
+            source={require('../../assets/compass_pointer.png')}
             style={{height: height / 26, resizeMode: 'contain'}}
           />
         </View>
@@ -69,7 +69,7 @@ export default function Compass() {
             {degree(data)}°
           </Text>
           <Image
-            source={require('../assets/compass_bg.png')}
+            source={require('../../assets/compass_bg.png')}
             style={{
               resizeMode: 'contain',
               height: width - 80,

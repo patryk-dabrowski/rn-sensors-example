@@ -1,8 +1,8 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import Home from './src/Home';
-import Compass from './src/Compass';
+import HomeScreen from './src/screens/HomeScreen';
+import CompassScreen from './src/screens/CompassScreen';
 
 
 const OPTIONS = {
@@ -13,25 +13,19 @@ const OPTIONS = {
   GYROSCOPE_SCREEN: 5,
 };
 
-const getScreen = (screen, actions) => {
-  switch (screen) {
-    case OPTIONS.HOME_SCREEN:
-      return <Home actions={actions}/>;
-    case OPTIONS.MAGNETOMETER_SCREEN:
-      return <Compass actions={actions}/>;
-    case OPTIONS.ACCELEROMETER_SCREEN:
-      return <Compass actions={actions}/>;
-    case OPTIONS.BAROMETER_SCREEN:
-      return <Compass actions={actions}/>;
-    case OPTIONS.GYROSCOPE_SCREEN:
-      return <Compass actions={actions}/>;
-    default:
-      return <Home actions={actions}/>;
+const getScreen = (screen) => {
+  const screens = {
+    [OPTIONS.HOME_SCREEN]: HomeScreen,
+    [OPTIONS.MAGNETOMETER_SCREEN]: CompassScreen,
+    [OPTIONS.ACCELEROMETER_SCREEN]: CompassScreen,
+    [OPTIONS.BAROMETER_SCREEN]: CompassScreen,
+    [OPTIONS.GYROSCOPE_SCREEN]: CompassScreen,
   }
+  return screens[screen];
 }
 
 export default function App() {
-  const [option, setOption] = useState();
+  const [option, setOption] = useState(OPTIONS.HOME_SCREEN);
 
   const actions = {
     switchToHome: () => setOption(OPTIONS.HOME_SCREEN),
@@ -41,11 +35,13 @@ export default function App() {
     switchToGyroscope: () => setOption(OPTIONS.GYROSCOPE_SCREEN),
   };
 
+  const Screen = getScreen(option);
+
   return (
     <View style={styles.container}>
       <StatusBar style='auto'/>
       <TouchableOpacity onPress={actions.switchToHome} style={styles.button}>
-        {getScreen(option, actions)}
+        <Screen actions={actions}/>
       </TouchableOpacity>
     </View>
   );
