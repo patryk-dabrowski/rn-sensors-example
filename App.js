@@ -3,6 +3,9 @@ import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import CompassScreen from './src/screens/CompassScreen';
+import AccelerometerScreen from "./src/screens/AccelerometerScreen";
+import BarometerScreen from "./src/screens/BarometerScreen";
+import GyroscopeScreen from "./src/screens/GyroscopeScreen";
 
 
 const OPTIONS = {
@@ -17,9 +20,9 @@ const getScreen = (screen) => {
   const screens = {
     [OPTIONS.HOME_SCREEN]: HomeScreen,
     [OPTIONS.MAGNETOMETER_SCREEN]: CompassScreen,
-    [OPTIONS.ACCELEROMETER_SCREEN]: CompassScreen,
-    [OPTIONS.BAROMETER_SCREEN]: CompassScreen,
-    [OPTIONS.GYROSCOPE_SCREEN]: CompassScreen,
+    [OPTIONS.ACCELEROMETER_SCREEN]: AccelerometerScreen,
+    [OPTIONS.BAROMETER_SCREEN]: BarometerScreen,
+    [OPTIONS.GYROSCOPE_SCREEN]: GyroscopeScreen,
   }
   return screens[screen];
 }
