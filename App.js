@@ -13,6 +13,23 @@ const OPTIONS = {
   GYROSCOPE_SCREEN: 5,
 };
 
+const getScreen = (screen, actions) => {
+  switch (screen) {
+    case OPTIONS.HOME_SCREEN:
+      return <Home actions={actions}/>;
+    case OPTIONS.MAGNETOMETER_SCREEN:
+      return <Compass actions={actions}/>;
+    case OPTIONS.ACCELEROMETER_SCREEN:
+      return <Compass actions={actions}/>;
+    case OPTIONS.BAROMETER_SCREEN:
+      return <Compass actions={actions}/>;
+    case OPTIONS.GYROSCOPE_SCREEN:
+      return <Compass actions={actions}/>;
+    default:
+      return <Home actions={actions}/>;
+  }
+}
+
 export default function App() {
   const [option, setOption] = useState();
 
@@ -24,34 +41,11 @@ export default function App() {
     switchToGyroscope: () => setOption(OPTIONS.GYROSCOPE_SCREEN),
   };
 
-  let currentScreen;
-
-  switch (option) {
-    case OPTIONS.HOME_SCREEN:
-      currentScreen = <Home actions={actions}/>;
-      break;
-    case OPTIONS.MAGNETOMETER_SCREEN:
-      currentScreen = <Compass actions={actions}/>;
-      break;
-    case OPTIONS.ACCELEROMETER_SCREEN:
-      currentScreen = <Compass actions={actions}/>;
-      break;
-    case OPTIONS.BAROMETER_SCREEN:
-      currentScreen = <Compass actions={actions}/>;
-      break;
-    case OPTIONS.GYROSCOPE_SCREEN:
-      currentScreen = <Compass actions={actions}/>;
-      break;
-    default:
-      currentScreen = <Home actions={actions}/>;
-      break;
-  }
-
   return (
     <View style={styles.container}>
-      <StatusBar style='light'/>
-      <TouchableOpacity onPress={actions.switchToHome}>
-        {currentScreen}
+      <StatusBar style='auto'/>
+      <TouchableOpacity onPress={actions.switchToHome} style={styles.button}>
+        {getScreen(option, actions)}
       </TouchableOpacity>
     </View>
   );
@@ -60,7 +54,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#666',
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -33,10 +33,19 @@ const styles = StyleSheet.create({
   box: {
     width: (width / 2) - 30,
     height: (width / 2) - 30,
-    backgroundColor: '#fff',
+    backgroundColor: '#ddd',
     margin: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 8,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
 });
