@@ -26,7 +26,7 @@ export default function CompassScreen() {
         <Pointer/>
         <Compass angle={data}/>
         <Text style={styles.degree}>{degree(data)}°</Text>
-        <Text style={styles.direction}>{direction(data)}</Text>
+        <Text style={styles.direction}>{direction(degree(data))}</Text>
       </View>
     </SensorContainer>
   );
