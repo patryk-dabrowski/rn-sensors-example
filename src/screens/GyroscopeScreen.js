@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Gyroscope} from 'expo-sensors';
-import SensorContainer from "../components/SensorContainer";
+import BaseContainer from "../components/BaseContainer";
 import TextCenter from "../components/TextCenter";
 import BtnCenter from "../components/BtnCenter";
 import BtnContainer from "../components/BtnContainer";
@@ -26,7 +26,7 @@ export default function GyroscopeScreen() {
 
   const {x, y, z} = coordinates;
   return (
-    <SensorContainer>
+    <BaseContainer>
       <TextCenter>Gyroscope:</TextCenter>
       <TextCenter>
         x: {round(x)} y: {round(y)} z: {round(z)}
@@ -35,6 +35,6 @@ export default function GyroscopeScreen() {
         <BtnCenter onPress={_slow}>Slow</BtnCenter>
         <BtnCenter onPress={_fast}>Fast</BtnCenter>
       </BtnContainer>
-    </SensorContainer>
+    </BaseContainer>
   );
 }

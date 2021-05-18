@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {Magnetometer} from 'expo-sensors';
-import SensorContainer from "../components/SensorContainer";
+import BaseContainer from "../components/BaseContainer";
 import {angle, degree, direction} from "../utils";
 import Pointer from "../components/Pointer";
 import Compass from "../components/Compass";
 
 const {height} = Dimensions.get('window');
 
-export default function CompassScreen() {
+export default function MagnetometerScreen() {
   const [data, setData] = useState(0);
 
   Magnetometer.setUpdateInterval(200);
@@ -21,14 +21,14 @@ export default function CompassScreen() {
   }, []);
 
   return (
-    <SensorContainer>
+    <BaseContainer>
       <View style={styles.container}>
         <Pointer/>
         <Compass angle={data}/>
         <Text style={styles.degree}>{degree(data)}°</Text>
         <Text style={styles.direction}>{direction(degree(data))}</Text>
       </View>
-    </SensorContainer>
+    </BaseContainer>
   );
 }
 

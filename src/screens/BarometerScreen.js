@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Platform} from 'react-native';
 import {Barometer} from 'expo-sensors';
-import SensorContainer from "../components/SensorContainer";
+import BaseContainer from "../components/BaseContainer";
 import TextCenter from "../components/TextCenter";
 
 export default function BarometerScreen() {
@@ -19,13 +19,13 @@ export default function BarometerScreen() {
 
   const {pressure, relativeAltitude} = data;
   return (
-    <SensorContainer>
+    <BaseContainer>
       <TextCenter>Barometer:</TextCenter>
-      <TextCenter>Pressure: {pressure * 100} Pa</TextCenter>
+      <TextCenter>Pressure: {pressure * (Platform.OS === 'ios' ? 100 : 1)} Pa</TextCenter>
       <TextCenter>
         Relative Altitude:{' '}
         {Platform.OS === 'ios' ? `${relativeAltitude} m` : `Only available on iOS`}
       </TextCenter>
-    </SensorContainer>
+    </BaseContainer>
   );
 }
