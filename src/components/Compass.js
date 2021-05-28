@@ -12,7 +12,7 @@ export default function Compass({angle}) {
         height: width - 80,
         transform: [
           {rotate: 360 - angle + "deg"}
-        ]
+        ],
       }}
     />
   )

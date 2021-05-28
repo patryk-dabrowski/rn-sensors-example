@@ -14,9 +14,10 @@ export default function BaseContainer({children}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#666',
+    backgroundColor: '#ddd',
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    alignItems: 'center',
+    padding: 20,
     height: height,
     width: width,
   },

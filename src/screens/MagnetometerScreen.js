@@ -38,15 +38,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   degree: {
-    color: '#fff',
+    color: '#333',
     fontSize: height / 27,
-    position: 'absolute',
   },
   direction: {
-    color: '#fff',
+    color: '#333',
     fontSize: height / 26,
     fontWeight: 'bold',
-    position: 'absolute',
-    bottom: '20%',
   },
 })

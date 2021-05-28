@@ -18,13 +18,18 @@ export default function BarometerScreen() {
   }, []);
 
   const {pressure, relativeAltitude} = data;
+
+  const isIOS = () => {
+    return Platform.OS === 'ios';
+  };
+
   return (
     <BaseContainer>
       <TextCenter>Barometer:</TextCenter>
-      <TextCenter>Pressure: {pressure * (Platform.OS === 'ios' ? 100 : 1)} Pa</TextCenter>
+      <TextCenter>Pressure: {(pressure * (isIOS() ? 100 : 1)).toFixed(2)} Pa</TextCenter>
       <TextCenter>
         Relative Altitude:{' '}
-        {Platform.OS === 'ios' ? `${relativeAltitude} m` : `Only available on iOS`}
+        {isIOS() ? `${relativeAltitude} m` : `Only available on iOS`}
       </TextCenter>
     </BaseContainer>
   );
